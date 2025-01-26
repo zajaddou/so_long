@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/26 04:03:46 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/26 07:06:47 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ struct s_map
 	int		p;
 	int		c;
 	int		e;
+	int		t1;
+	int		t2;
+	int		t3;
+	int		t4;
 };
 
 int isvalid(char *name, struct s_map *data);

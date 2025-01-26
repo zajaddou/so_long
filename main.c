@@ -12,19 +12,12 @@ static void m2d(char *map, int w, int h, char ***map_2d)
     while (y < h)
     {
         x = 0;
-        printf("%d : ",y);
         while (x < w+1)
         {
-            usleep(2000);
             if (x == w)
-            {
                 (*map_2d)[y][x] = '\0';
-                printf(" *\n");
-            }
-            else {
-                printf("▅");
+            else
                 (*map_2d)[y][x] = map[i];
-            }
             i++;
             x++;
         }
@@ -33,15 +26,20 @@ static void m2d(char *map, int w, int h, char ***map_2d)
     (*map_2d)[y] = NULL;
 }
 
+
 int main()
 {
     struct s_map data;
 
     isvalid("assets/map.ber", &data);
 
-    int i  = 0;
-    int y  = 0;
-    int x  = 0;
+    int i;
+    int y;
+    int x;
+
+    x = 0;
+    i = 0;
+    y = 0;
 
     char **map_2d;
     
@@ -50,11 +48,17 @@ int main()
     while (i < data.h)
         map_2d[i++] = (char *)malloc((data.w + 1) * sizeof(char ));
 
-    printf("> Convirt Map to 2D Arrey : \n\n");
     m2d(data.map, data.w, data.h, &map_2d);
-    printf("\n\n");
 
-    printf("%s",map_2d[7]);
+    y = 0;
+    while (y < data.h)
+    {
+        if (!(map_2d[y][0] == '1' && map_2d[y][data.w-1] == '1'))
+            return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
+        y++;
+    }
+
+    
 
     return 0;
 }
