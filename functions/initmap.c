@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/26 09:28:06 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/26 20:51:45 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,33 @@ static int border_check(struct s_map *data)
     return (0);
 }
 
+
+static void algo(int x,int y, struct s_map *data)
+{
+    if (data->map_2d[x][y] == '1' || data->map_2d[x][y] == 'V')
+        return;
+
+    if (data->map_2d[x][y] == 'P')
+        data->found_p++;
+
+    if (data->map_2d[x][y] == 'C')
+        data->found_c++;
+
+    if (data->map_2d[x][y] == 'E')
+        data->found_e++;
+
+    data->map_2d[x][y] = 'V';
+
+    algo(x, y+1, data);
+    algo(x, y-1, data);
+    algo(x+1, y, data);
+    algo(x-1, y, data);
+}
+
 int initmap(struct s_map *data)
 {
-    isvalid(data);
+    if (isvalid(data))
+        return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
 
     int i;
     int y;
@@ -70,5 +94,11 @@ int initmap(struct s_map *data)
         
     if (border_check(data))
         return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
+        
+    algo(1, 1, data);
+
+    if (data->p != data->found_p || data->c != data->found_c || data->e != data->found_e)
+        return (printf("\n%s\n\n",  " Invalid Game ! "), 1);
+    
     return (0);
 }
