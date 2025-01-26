@@ -6,16 +6,16 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/26 03:01:52 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/26 05:18:01 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void	init(struct s_map *data, int *old_w, int *fd)
+static void	init(struct s_map *data, int *ow, int *fd)
 {
 	*fd = 0;
-	*old_w = 0;
+	*ow = 0;
 	data->h = 0;
 	data->w = 0;
 	data->p = 0;
@@ -43,7 +43,7 @@ static int	scanline(char *line, struct s_map *data)
 	return (i);
 }
 
-int	readmap(char *name, struct s_map *data)
+static int	readmap(char *name, struct s_map *data)
 {
 	char	*buff;
 	int		ow;
@@ -68,4 +68,29 @@ int	readmap(char *name, struct s_map *data)
 		ow = data->w;
 	}
 	return (0);
+}
+
+int isvalid(char *name, struct s_map *data)
+{
+    if (readmap(name, data) == 1 && !data->map)
+        return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
+
+    if (!(data->p == 1 && data->c >= 1 && data->e == 1))
+        return (printf("\n%s\n\n",  " Invalid Game ! "), 1);
+    
+	int i = 0;
+
+	while (data->map[i])
+	{
+		if (data->map[i] == '1' )
+			printf("%s", "▉");
+		else if (data->map[i] == '0')
+			printf("%c", ' ');
+		else
+			printf("%c", data->map[i]);
+		i++;
+	}
+	
+    printf("\n\n height = %d | width = %d\n\n P = %d \n C = %d \n E = %d\n\n", data->h, data->w, data->p, data->c, data->e);
+    return (0);
 }

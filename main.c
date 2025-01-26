@@ -3,23 +3,58 @@
 
 #include <stdio.h>
 
-int isvalid(char *name)
+static void m2d(char *map, int w, int h, char ***map_2d)
+{
+    int i = 0;
+    int x = 0;
+    int y = 0;
+
+    while (y < h)
+    {
+        x = 0;
+        printf("%d : ",y);
+        while (x < w+1)
+        {
+            usleep(2000);
+            if (x == w)
+            {
+                (*map_2d)[y][x] = '\0';
+                printf(" *\n");
+            }
+            else {
+                printf("▅");
+                (*map_2d)[y][x] = map[i];
+            }
+            i++;
+            x++;
+        }
+        y++;
+    }
+    (*map_2d)[y] = NULL;
+}
+
+int main()
 {
     struct s_map data;
 
-    if (readmap(name, &data) == 1 && !data.map)
-        return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
+    isvalid("assets/map.ber", &data);
 
-    if (!(data.p == 1 && data.c >= 1 && data.e == 1))
-        return (printf("\n%s\n\n",  " Invalid Game ! "), 1);
+    int i  = 0;
+    int y  = 0;
+    int x  = 0;
+
+    char **map_2d;
     
-    printf("\n%s", data.map);
-    printf("\n\n height = %d | width = %d\n\n P = %d \n C = %d \n E = %d\n\n", data.h, data.w, data.p, data.c, data.e);
-    return (0);
-}
+    map_2d = (char **)malloc((data.h + 1) * sizeof(char *));
 
-int main(void)
-{
-    isvalid("assets/map.ber");
-    return (0);
+    while (i < data.h)
+        map_2d[i++] = (char *)malloc((data.w + 1) * sizeof(char ));
+
+    printf("> Convirt Map to 2D Arrey : \n\n");
+    m2d(data.map, data.w, data.h, &map_2d);
+    printf("\n\n");
+
+    printf("%s",map_2d[7]);
+
+    return 0;
 }
