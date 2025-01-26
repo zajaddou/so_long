@@ -11,7 +11,6 @@ int main()
 
     initmap(&data);
 
-
     // Now Time For Algoo , algo time Ohhhhh
     printf("%s\n\n", data.map);
 
