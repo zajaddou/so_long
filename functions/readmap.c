@@ -6,13 +6,13 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/26 08:06:04 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/26 09:21:42 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void	init(struct s_map *data, int *ow, int *fd)
+static void	initvar(struct s_map *data, int *ow, int *fd)
 {
 	*fd = 0;
 	*ow = 0;
@@ -23,6 +23,7 @@ static void	init(struct s_map *data, int *ow, int *fd)
 	data->e = 0;
 	data->fd = 0;
 	data->map = NULL;
+	data->map_2d = NULL;
 }
 
 static int	scanline(char *line, struct s_map *data)
@@ -43,13 +44,13 @@ static int	scanline(char *line, struct s_map *data)
 	return (i);
 }
 
-static int	readmap(char *name, struct s_map *data)
+static int	readfile(struct s_map *data)
 {
 	char	*buff;
 	int		ow;
 
-	init(data, &ow, &data->fd);
-	data->fd = open(name, O_RDONLY);
+	initvar(data, &ow, &data->fd);
+	data->fd = open(data->map_path, O_RDONLY);
 	if (data->fd < 0)
 		return (1);
 	while (1)
@@ -70,9 +71,9 @@ static int	readmap(char *name, struct s_map *data)
 	return (0);
 }
 
-int isvalid(char *name, struct s_map *data)
+int isvalid(struct s_map *data)
 {
-    if (readmap(name, data) == 1 && !data->map)
+    if (readfile(data) == 1 && !data->map)
         return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
 
     if (!(data->p == 1 && data->c >= 1 && data->e == 1))

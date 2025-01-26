@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/26 07:06:47 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/26 09:21:07 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,17 @@
 struct s_map
 {
 	char	*map;
+	char	**map_2d;
+	char	*map_path;
 	int		fd;
 	int		h;
 	int		w;
 	int		p;
 	int		c;
 	int		e;
-	int		t1;
-	int		t2;
-	int		t3;
-	int		t4;
 };
 
-int isvalid(char *name, struct s_map *data);
+int isvalid(struct s_map *data);
+int initmap(struct s_map *data);
 
 #endif
