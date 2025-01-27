@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/27 12:36:33 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:38:04 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,22 @@
 
 # include "LIBFT/libft.h"
 
+# include <mlx.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <limits.h>
 # include <unistd.h>
+
+struct s_render
+{
+    int  py;
+    int  px;
+    void *mlx;
+    void *win;
+	void *imgs[4];
+    char *paths[5];
+};
 
 struct s_map
 {
@@ -46,5 +57,6 @@ struct s_map
 
 int is_valid(struct s_map *data);
 int initmap(struct s_map *data);
+int joingame(struct s_map *data, struct s_render *render);
 
 #endif
