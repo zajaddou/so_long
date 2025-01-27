@@ -33,6 +33,6 @@ fclean: clean
 re: fclean all clean
 
 run: all
-	clear && gcc main.c LIBFT/libft.a so_long.a && ./a.out && rm -rf a.out 
+	clear && gcc main.c  -lmlx -framework OpenGL -framework AppKit LIBFT/libft.a so_long.a && ./a.out && rm -rf a.out 
 
 .PHONY: all clean fclean

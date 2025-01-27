@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/27 03:43:57 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:36:33 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 struct s_map
 {
 	char	*map;
-	char	**map_2d;
+	char	**map_2d_real;
+	char	**map_2d_algo;
 	char	*map_path;
 
 	int 	found_p;
@@ -33,25 +34,17 @@ struct s_map
 	
 	int		h;
 	int		w;
-	
 	int		py;
 	int		px;
-
 	int		p;
 	int		c;
 	int		e;
-	
 	int		fd;
 	int		ow;
+	int 	i;
 };
 
-struct player
-{
-	int x;
-	int y;
-};
-
-int isvalid(struct s_map *data);
+int is_valid(struct s_map *data);
 int initmap(struct s_map *data);
 
 #endif
