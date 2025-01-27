@@ -6,22 +6,27 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/26 09:21:42 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/27 04:51:12 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void	initvar(struct s_map *data, int *ow, int *fd)
+static void	initvar(struct s_map *data)
 {
-	*fd = 0;
-	*ow = 0;
+	data->fd = 0;
+	data->ow = 0;
 	data->h = 0;
 	data->w = 0;
 	data->p = 0;
 	data->c = 0;
 	data->e = 0;
 	data->fd = 0;
+	data->px = 0;
+	data->py = 0;
+	data->found_p = 0;
+	data->found_c = 0;
+	data->found_e = 0;
 	data->map = NULL;
 	data->map_2d = NULL;
 }
@@ -47,9 +52,9 @@ static int	scanline(char *line, struct s_map *data)
 static int	readfile(struct s_map *data)
 {
 	char	*buff;
-	int		ow;
-
-	initvar(data, &ow, &data->fd);
+	
+	initvar(data);
+	
 	data->fd = open(data->map_path, O_RDONLY);
 	if (data->fd < 0)
 		return (1);
@@ -63,35 +68,26 @@ static int	readfile(struct s_map *data)
 		data->map = ft_strjoin(data->map, buff);
 		free(buff);
 		buff = NULL;
-		if (((ow != data->w) && ow)
-			|| ((data->w == data->h) && ((data->h + data->w) > 0)))
+		if ((data->ow != data->w) && data->ow > 0)
 			return (close(data->fd), free(data->map), data->map = NULL, 1);
-		ow = data->w;
+		data->ow = data->w;
 	}
+	return (0);
+}
+
+int ext(struct s_map *data)
+{
+	
 	return (0);
 }
 
 int isvalid(struct s_map *data)
 {
     if (readfile(data) == 1 && !data->map)
-        return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
+        return (1);
 
     if (!(data->p == 1 && data->c >= 1 && data->e == 1))
-        return (printf("\n%s\n\n",  " Invalid Game ! "), 1);
-    
-	int i = 0;
-
-	while (data->map[i])
-	{
-		if (data->map[i] == '1' )
-			printf("%s", "▉");
-		else if (data->map[i] == '0')
-			printf("%c", ' ');
-		else
-			printf("%c", data->map[i]);
-		i++;
-	}
+        return (1);
 	
-    printf("\n\n height = %d | width = %d\n\n P = %d \n C = %d \n E = %d\n\n", data->h, data->w, data->p, data->c, data->e);
     return (0);
 }

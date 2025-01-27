@@ -9,7 +9,9 @@ int main()
 
     data.map_path = "assets/map.ber";
 
-    initmap(&data);
+    if (initmap(&data))
+        printf("\n Invalid Input !\n\n");
 
+    printf("Enjoy :)\n\n");
     return 0;
 }

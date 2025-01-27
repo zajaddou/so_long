@@ -6,13 +6,13 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/26 20:51:45 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/27 04:48:44 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void m2d(struct s_map *data)
+static void fill_map(struct s_map *data)
 {
     int i = 0;
     int x = 0;
@@ -21,8 +21,13 @@ static void m2d(struct s_map *data)
     while (y < data->h)
     {
         x = 0;
-        while (x < data->w+1)
+        while (x <= data->w)
         {
+            if (data->map[i] == 'P')
+            {
+                data->px = x;
+                data->py = y;
+            }
             if (x == data->w)
                 (data->map_2d)[y][x] = '\0';
             else
@@ -49,56 +54,76 @@ static int border_check(struct s_map *data)
     return (0);
 }
 
-
-static void algo(int x,int y, struct s_map *data)
+static void algo(int y, int x, struct s_map *data)
 {
-    if (data->map_2d[x][y] == '1' || data->map_2d[x][y] == 'V')
+    if (data->map_2d[y][x] == '1' || data->map_2d[y][x] == 'V')
         return;
-
-    if (data->map_2d[x][y] == 'P')
+    
+    if (data->map_2d[y][x] == 'P')
         data->found_p++;
-
-    if (data->map_2d[x][y] == 'C')
+    else if (data->map_2d[y][x] == 'C')
         data->found_c++;
-
-    if (data->map_2d[x][y] == 'E')
+    else if (data->map_2d[y][x] == 'E')
         data->found_e++;
 
-    data->map_2d[x][y] = 'V';
+    data->map_2d[y][x] = 'V';
+    
+    algo(y+1, x, data);
+    algo(y-1, x, data);
+    algo(y, x+1, data);
+    algo(y, x-1, data);
+} 
 
-    algo(x, y+1, data);
-    algo(x, y-1, data);
-    algo(x+1, y, data);
-    algo(x-1, y, data);
-}
-
-int initmap(struct s_map *data)
+void printmap(struct s_map *data)
 {
-    if (isvalid(data))
-        return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
-
-    int i;
     int y;
     int x;
 
     x = 0;
-    i = 0;
     y = 0;
+    
+    while (y < data->h)
+    {
+        x = 0;
+        while (x < data->w)
+        {
+           	if (data->map_2d[y][x] == '1' )
+			    printf("%s", "▉");
+            else if (data->map_2d[y][x] == '0')
+                printf("%c", ' ');
+            else
+			    printf("%c", data->map_2d[y][x]);
+            x++;
+        }
+        printf("\n");
+		y++;
+	}
+    printf("\n");
+}
 
+int initmap(struct s_map *data)
+{
+    int i;
+    if (isvalid(data))
+        return (1);
+
+    i = 0;
     data->map_2d = (char **)malloc((data->h + 1) * sizeof(char *));
-
+    
     while (i < data->h)
         data->map_2d[i++] = (char *)malloc((data->w + 1) * sizeof(char ));
-
-    m2d(data);
         
+    fill_map(data);
+
     if (border_check(data))
-        return (printf("\n%s\n\n",  " Invalid Map ! "), 1);
-        
-    algo(1, 1, data);
+        return (1);
 
-    if (data->p != data->found_p || data->c != data->found_c || data->e != data->found_e)
-        return (printf("\n%s\n\n",  " Invalid Game ! "), 1);
+    printmap(data);
+
+    algo(data->py, data->px, data);
+
+    if (!(data->found_p == data->p) && (data->found_c == data->c) && (data->found_e == data->e))
+        return (1);
     
     return (0);
 }
