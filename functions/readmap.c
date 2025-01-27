@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/27 04:51:12 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/27 06:06:19 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,42 @@ static int	readfile(struct s_map *data)
 			return (close(data->fd), free(data->map), data->map = NULL, 1);
 		data->ow = data->w;
 	}
+	if (!(data->p == 1 && data->c >= 1 && data->e == 1))
+        return (1);
 	return (0);
 }
 
-int ext(struct s_map *data)
+static int validpath(char *path)
 {
-	
-	return (0);
+    size_t len;
+    size_t i;
+    char *ext;
+
+    ext = ".ber";
+    if (!path)
+        return (1);
+    
+    len = ft_strlen(path);
+    if (len < 4)
+        return (1);
+    
+    i = len - 1;
+    for (int j = 3; j >= 0; j--)
+    {
+        if (path[i] != ext[j])
+            return (1);
+        i--;
+    }
+    return (0);
 }
 
 int isvalid(struct s_map *data)
 {
-    if (readfile(data) == 1 && !data->map)
+	if (validpath(data->map_path) == 1)
+        return (1);
+		
+    if ((readfile(data) == 1) && (data->map == NULL))
         return (1);
 
-    if (!(data->p == 1 && data->c >= 1 && data->e == 1))
-        return (1);
-	
     return (0);
 }

@@ -11,7 +11,7 @@ int main()
 
     if (initmap(&data))
         printf("\n Invalid Input !\n\n");
-
-    printf("Enjoy :)\n\n");
+    else
+        printf("Enjoy :)\n\n");
     return 0;
 }

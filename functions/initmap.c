@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/27 04:48:44 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/27 06:23:05 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,6 @@ static int border_check(struct s_map *data)
     return (0);
 }
 
-static void algo(int y, int x, struct s_map *data)
-{
-    if (data->map_2d[y][x] == '1' || data->map_2d[y][x] == 'V')
-        return;
-    
-    if (data->map_2d[y][x] == 'P')
-        data->found_p++;
-    else if (data->map_2d[y][x] == 'C')
-        data->found_c++;
-    else if (data->map_2d[y][x] == 'E')
-        data->found_e++;
-
-    data->map_2d[y][x] = 'V';
-    
-    algo(y+1, x, data);
-    algo(y-1, x, data);
-    algo(y, x+1, data);
-    algo(y, x-1, data);
-} 
-
 void printmap(struct s_map *data)
 {
     int y;
@@ -101,6 +81,29 @@ void printmap(struct s_map *data)
     printf("\n");
 }
 
+static void algo(int y, int x, struct s_map *data)
+{
+    
+    if (data->map_2d[y][x] == '1' || data->map_2d[y][x] == '#')
+        return;
+    
+    if (data->map_2d[y][x] == 'P')
+        data->found_p++;
+    else if (data->map_2d[y][x] == 'C')
+        data->found_c++;
+    else if (data->map_2d[y][x] == 'E')
+        data->found_e++;
+
+    data->map_2d[y][x] = '#';
+    
+    algo(y+1, x, data);
+    algo(y-1, x, data);
+    algo(y, x+1, data);
+    algo(y, x-1, data);
+} 
+
+
+
 int initmap(struct s_map *data)
 {
     int i;
@@ -122,8 +125,8 @@ int initmap(struct s_map *data)
 
     algo(data->py, data->px, data);
 
-    if (!(data->found_p == data->p) && (data->found_c == data->c) && (data->found_e == data->e))
+    if ((data->found_p != data->p) || (data->found_c != data->c) || (data->found_e != data->e))
         return (1);
-    
+
     return (0);
 }
