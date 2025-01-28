@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/27 08:38:00 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/28 05:05:35 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static void	initvar(struct s_map *data)
 	data->found_c = 0;
 	data->found_e = 0;
 	data->map = NULL;
-	data->map_2d_algo = NULL;
-	data->map_2d_real = NULL;
+	data->map_2d = NULL;
 }
 
 static int	scanline(char *line, struct s_map *data)
