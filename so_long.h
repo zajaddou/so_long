@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/27 14:38:04 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/28 01:19:15 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 
 struct s_render
 {
+	int  h;
+	int	 w;
     int  py;
     int  px;
     void *mlx;
     void *win;
-	void *imgs[4];
-    char *paths[5];
 };
 
 struct s_map
