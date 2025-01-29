@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 04:12:51 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/29 05:49:27 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ struct s_render
 	int	 w;
     int  py;
     int  px;
-
+	int	 door_y;
+	int  door_x;
 	int	 coins;
 	
     void *mlx;
@@ -38,6 +39,9 @@ struct s_render
 
 struct s_map
 {
+	int	 door_y;
+	int  door_x;
+	
 	char	*map;
 	char	**map_2d;
 	char	*map_path;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initmap.c                                          :+:      :+:    :+:   */
+/*   makemap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 04:07:22 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/29 05:58:25 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static void fill_map(struct s_map *data, char ***map, int x, int y)
             {
                 data->px = x;
                 data->py = y;
+            }
+            if (data->map[i] == 'E')
+            {
+                data->door_x = x;
+                data->door_y = y;
             }
             if (x == data->w)
                 (*map)[y][x] = '\0';
@@ -113,7 +118,8 @@ int makemap(struct s_map *data)
     algo(data->py, data->px, data);
     free(data->map_2d);
 
-    allocate_2d(data, 0);
+    if (allocate_2d(data, 0))
+        return (1);
     
     if ((data->found_p != data->p) || (data->found_c != data->c) || (data->found_e != data->e))
         return (1);

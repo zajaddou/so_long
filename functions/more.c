@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 02:26:53 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 04:12:43 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/29 05:50:07 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	init_render(struct s_render *render)
 	render->px = 0;
 	render->py = 0;
 	render->coins = 0;
+	render->door_y = 0;
+	render->door_x = 0;
     render->mlx = NULL;
     render->win = NULL;
 	render->map_2d = NULL;
@@ -36,6 +38,8 @@ int	init_render(struct s_render *render)
 
 void	init_map(struct s_map *data)
 {
+	data->door_y = 0;
+	data->door_x = 0;
 	data->fd = 0;
 	data->ow = 0;
 	data->h = 0;
