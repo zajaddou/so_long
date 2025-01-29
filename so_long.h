@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 05:49:27 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/29 06:19:05 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ int  is_valid(struct s_map *data);
 int  move_player(struct s_render *render, int keycode);
 int  joingame(struct s_map *data, struct s_render *render);
 void render_game(struct s_render *render, int y, int x);
-void print_map(int h, int w, char ***map);
 
 #endif

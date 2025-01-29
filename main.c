@@ -16,7 +16,8 @@ int main(void)
 
     data->map_path = "maps/dev.ber";
 
-    joingame(data, render);
+    if (joingame(data, render))
+        exit(1);
 
     mlx_loop(render->mlx);
     return (0);
