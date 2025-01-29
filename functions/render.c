@@ -6,32 +6,11 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:20:59 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/28 07:25:52 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/29 04:16:35 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-static int	init_render(struct s_render *render)
-{
-	render->h = 0;
-	render->w = 0;
-	render->px = 0;
-	render->py = 0;
-    render->mlx = NULL;
-    render->win = NULL;
-	render->map_2d = NULL;
-    
-    render->mlx = malloc(sizeof(void *));
-    if (!render->mlx)
-        return (1);
-
-    render->win = malloc(sizeof(void *));
-    if (!render->mlx)
-        return (1);
-    
-    return (0);
-}
 
 static void setblock(struct s_render *render, char *xmp, int x, int y)
 {
@@ -80,7 +59,8 @@ static int key_handler(int keycode, struct s_render *render)
 
 int joingame(struct s_map *data, struct s_render *render)
 {
-    if (init_map(data))
+
+    if (makemap(data)) 
         return (1);
 
     if (init_render(render))
@@ -93,8 +73,9 @@ int joingame(struct s_map *data, struct s_render *render)
     render->h = data->h;
     render->px = data->px;
 	render->py = data->py;
+	render->coins = data->found_c;
     render->map_2d = data->map_2d;
-    
+
     render_game(render, 0, 0);
 
     mlx_key_hook(render->win, (int (*)())key_handler, render);

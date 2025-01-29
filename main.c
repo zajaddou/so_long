@@ -1,13 +1,8 @@
 #include "so_long.h"
 #include <stdio.h>
 
-void f()
-{
-    system("leaks a.out | grep 'leaks for'");
-}
 int main(void)
 {
-    atexit(f);
     struct s_map *data;
     struct s_render *render;
 
@@ -17,7 +12,9 @@ int main(void)
     data = malloc (sizeof(struct s_map));
     render = malloc (sizeof(struct s_render));
 
-    data->map_path = "maps/map.ber";
+    init_map(data);
+
+    data->map_path = "maps/dev.ber";
 
     joingame(data, render);
 

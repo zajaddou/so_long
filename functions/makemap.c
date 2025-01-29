@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/28 07:04:17 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/29 04:07:22 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ static int border_check(struct s_map *data, int i)
     return (0);
 }
 
-void print_map(struct s_map *data, char ***map, int y, int x)
+void print_map(int h, int w, char ***map)
 {
-    while (y < data->h)
+    int y = 0;
+    int x = 0;
+
+    while (y < h)
     {
         x = 0;
-        while (x < data->w)
+        while (x < w)
         {
            	if ((*map)[y][x] == '1' )
 			    printf("%s", "▉▉");
@@ -95,12 +98,12 @@ int allocate_2d(struct s_map *data, int i)
     return (0);
 }
 
-int init_map(struct s_map *data)
+int makemap(struct s_map *data)
 {
     
     if (is_valid(data))
         return (1);
-
+    
     if (allocate_2d(data, 0))
         return (1);
     
@@ -115,7 +118,7 @@ int init_map(struct s_map *data)
     if ((data->found_p != data->p) || (data->found_c != data->c) || (data->found_e != data->e))
         return (1);
 
-    print_map(data, &data->map_2d, 0, 0);
+    print_map(data->h,data->w, &data->map_2d);
         
     return (0);
 }

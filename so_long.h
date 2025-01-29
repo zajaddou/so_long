@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/28 07:25:58 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/29 04:12:51 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ struct s_render
 	int	 w;
     int  py;
     int  px;
+
+	int	 coins;
+	
     void *mlx;
     void *win;
 	char **map_2d;
@@ -55,11 +58,14 @@ struct s_map
 	int 	i;
 };
 
+void seg(void);
+int	 init_render(struct s_render *render);
+void init_map(struct s_map *data);
+int  makemap(struct s_map *data);
 int  is_valid(struct s_map *data);
-int  init_map(struct s_map *data);
 int  move_player(struct s_render *render, int keycode);
 int  joingame(struct s_map *data, struct s_render *render);
 void render_game(struct s_render *render, int y, int x);
-void print_map(struct s_map *data, char ***map, int y, int x);
+void print_map(int h, int w, char ***map);
 
 #endif

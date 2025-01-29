@@ -3,7 +3,7 @@ NAME = so_long.a
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
 
-SRCS = functions/readmap.c functions/initmap.c functions/render.c functions/movement.c
+SRCS = functions/readmap.c functions/makemap.c functions/render.c functions/movement.c functions/more.c
 
 OBJS = $(SRCS:.c=.o)
 
