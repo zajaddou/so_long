@@ -6,17 +6,50 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 06:50:37 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 09:56:46 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void fill_map(struct s_data *data, char ***map, int x, int y)
+void	init_map(struct s_data *data)
+{
+	data->door_y = 0;
+	data->door_x = 0;
+	data->fd = 0;
+	data->ow = 0;
+	data->h = 0;
+	data->w = 0;
+	data->p = 0;
+	data->c = 0;
+	data->e = 0;
+	data->fd = 0;
+	data->px = 0;
+	data->py = 0;
+	data->found_p = 0;
+	data->found_c = 0;
+	data->found_e = 0;
+	data->mlx = NULL;
+	data->win = NULL;
+	data->map = NULL;
+	data->map_2d = NULL;
+}
+
+void free2D(char ***map)
 {
     int i;
-
+    
     i = 0;
+    if (!map || !*map)
+        return;
+    while ((*map)[i] != NULL)
+        free((*map)[i++]);
+    free(*map);
+    *map = NULL;
+}
+
+static void fill_map(struct s_data *data, int i, int x, int y)
+{
     while (y < data->h)
     {
         x = 0;
@@ -33,26 +66,17 @@ static void fill_map(struct s_data *data, char ***map, int x, int y)
                 data->door_y = y;
             }
             if (x == data->w)
-                (*map)[y][x] = '\0';
+                (data->map_2d)[y][x] = '\0';
             else
-                (*map)[y][x] = data->map[i];
+                (data->map_2d)[y][x] = data->map[i];
             i++;
             x++;
         }
         y++;
     }
-    (*map)[y] = NULL;
+    (data->map_2d)[y] = NULL;
 }
-void border_check(struct s_data *data, int i)
-{
-    while (i < data->h)
-        if (data->map_2d[i][0] != '1' || data->map_2d[i++][data->h-1] != '1')
-            error(" invalid border !");
-    i = 0;
-    while (i < data->w)
-       if (data->map_2d[0][i] != '1' || data->map_2d[data->w-1][i++] != '1')
-            error(" invalid border !");
-}
+
 
 void algo(int y, int x, struct s_data *data)
 {
@@ -84,5 +108,5 @@ void allocate_2d(struct s_data *data, int i)
            free2D(&data->map_2d);
         i++;
     }
-    fill_map(data, &data->map_2d, 0, 0);
+    fill_map(data, 0, 0, 0);
 }

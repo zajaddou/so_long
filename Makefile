@@ -1,9 +1,8 @@
-
 NAME = so_long.a
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
 
-SRCS = MND/readmap.c MND/makemap.c MND/render.c MND/movement.c MND/more.c
+SRCS = MND/fun_mnd1.c MND/fun_mnd2.c MND/fun_mnd3.c MND/fun_mnd4.c
 
 OBJS = $(SRCS:.c=.o)
 

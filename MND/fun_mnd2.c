@@ -1,16 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readmap.c                                          :+:      :+:    :+:   */
+/*   fun_mnd2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 06:09:58 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:03:09 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+static int move_to(int keycode, struct s_data *data, int y, int x)
+{
+    if (keycode == 123) 
+        (x)--;
+    else if (keycode == 124) 
+        (x)++;
+    else if (keycode == 125)
+        (y)++;
+    else if (keycode == 126)
+        (y)--;
+    if (data->map_2d[y][x] == '1')
+        return (1);
+    else if (data->map_2d[y][x] == 'C')
+        data->c--;
+    else if (data->map_2d[y][x] == 'E' && data->c == 0)
+        return (write(1, " You Win :) \n",13),exit(0),1);
+    data->map_2d[data->py][data->px] = '0';
+    if (data->map_2d[data->door_y][data->door_x] == '0')
+        data->map_2d[data->door_y][data->door_x] = 'E';
+    data->px = x;
+    data->py = y;
+    data->map_2d[data->py][data->px] = 'P';
+    return (0);
+}
+
+int move_player(struct s_data *data, int keycode)
+{
+    static int moves;
+    if (move_to(keycode, data, data->py, data->px) == 0)
+    {
+        printf(" Move : %d\n",++moves);
+        mlx_clear_window(data->mlx, data->win); 
+    }
+    render_game(data, 0, 0);
+    return (0);
+}
 
 static int	scanline(char *line, struct s_data *data)
 {
@@ -53,32 +90,30 @@ int	read_file(struct s_data *data, int fd, char *buff, char *temp)
 			return (close(fd), free(data->map), data->map = NULL, 1);
 		data->ow = data->w;
 	}
-	if (!(data->p == 1 && data->c >= 1 && data->e == 1))
-        return (1);
 	return (0);
 }
 
 int validpath(char *path)
 {
-    size_t len;
-    size_t i;
+    int len;
+    int i;
+    int b;
     char *ext;
 
     ext = ".ber";
     if (!path)
         return (1);
-    
     len = ft_strlen(path);
     if (len < 4)
         return (1);
-    
     i = len - 1;
-    for (int j = 3; j >= 0; j--)
+    b = 3;
+    while (b >= 0)
     {
-        if (path[i] != ext[j])
+        if (path[i] != ext[b])
             return (1);
         i--;
+        b--;
     }
     return (0);
 }
-
