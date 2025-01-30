@@ -1,38 +1,48 @@
-NAME = so_long.a
-CFLAGS = -Wall -Wextra -Werror
-MLX= -lmlx -framework OpenGL -framework AppKit
-CC = cc
 
-SRCS = MND/render.c MND/algo.c MND/control.c MND/check.c MND/more.c MND/readfile.c MND/fillmap.c
+NAME = so_long
+BONUS_NAME = so_long_bonus
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+
+MLX = -lmlx -framework OpenGL -framework AppKit
+
+
+SRCS = MND/render.c MND/algo.c MND/control.c MND/check.c MND/more.c \
+	   MND/readfile.c MND/fillmap.c so_long.c
+
+BONUS_SRCS = BNS/render_bonus.c BNS/algo_bonus.c BNS/control_bonus.c \
+			 BNS/more_bonus.c so_long_bonus.c \
+			 MND/readfile.c MND/fillmap.c MND/check.c
 
 OBJS = $(SRCS:.c=.o)
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 
-LIBFT_DIR =  LIBFT
+LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-all: $(NAME) clean
-	clear
+all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	cc so_long.c $(FLAGS) $(OBJS) -o so_long $(MLX) LIBFT/libft.a 
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX) $(LIBFT)
+
+bonus: $(BONUS_OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) -o $(BONUS_NAME) $(MLX) $(LIBFT)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR)
 
 %.o: %.c so_long.h
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -f $(OBJS) $(BONUS_OBJS)
+	make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME) $(BONUS_NAME)
+	make -C $(LIBFT_DIR) fclean
 
-re: fclean all clean
+re: fclean all
 
-run: all
-	clear && ./so_long && rm -rf so_long
-
-.PHONY: all clean fclean
+.PHONY: all clean fclean re bonus
