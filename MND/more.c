@@ -6,37 +6,13 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 02:26:53 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 04:37:51 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 06:51:18 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	init_render(struct s_render *render)
-{
-	render->h = 0;
-	render->w = 0;
-	render->px = 0;
-	render->py = 0;
-	render->coins = 0;
-	render->door_y = 0;
-	render->door_x = 0;
-    render->mlx = NULL;
-    render->win = NULL;
-	render->map_2d = NULL;
-    
-    render->mlx = malloc(sizeof(void *));
-    if (!render->mlx)
-        return (1);
-
-    render->win = malloc(sizeof(void *));
-    if (!render->win)
-        return (1);
-    
-    return (0);
-}
-
-void	init_map(struct s_map *data)
+void	init_map(struct s_data *data)
 {
 	data->door_y = 0;
 	data->door_x = 0;
@@ -55,6 +31,13 @@ void	init_map(struct s_map *data)
 	data->found_e = 0;
 	data->map = NULL;
 	data->map_2d = NULL;
+	data->mlx = malloc(sizeof(void *));
+    if (!data->mlx)
+	    error(" Failed to allocate ( data->mlx ) !");
+
+    data->win = malloc(sizeof(void *));
+    if (!data->win)
+        error(" Failed to allocate ( data->win ) !");
 }
 
 void free2D(char ***map)
@@ -70,20 +53,13 @@ void free2D(char ***map)
     *map = NULL;
 }
 
-void invalid_map()
+void error(char *str)
 {
-	printf("\n invalid map !\n\n");
-	exit(1);
-}
-
-void invalid_game()
-{
-	printf("\n invalid game !\n\n");
-	exit(1);
-}
-
-void system_error()
-{
-	printf("\n System Error !\n\n");
-	exit(1);
+	if (!str)
+		return ;
+	write(1,"\n",1);
+	while (*str)
+		write(1, str++, 1);
+	write(1,"\n\n",2);
+    exit (1);
 }

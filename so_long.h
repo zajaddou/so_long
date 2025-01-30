@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 04:57:59 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 06:46:51 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,11 @@
 
 # include <stdio.h>
 
-struct s_render
+struct s_data
 {
-	int  h;
-	int	 w;
-    int  py;
-    int  px;
-	int	 door_y;
-	int  door_x;
-	int	 coins;
-	
-    void *mlx;
+	void *mlx;
     void *win;
-	char **map_2d;
-};
-
-struct s_map
-{
+	
 	int	 door_y;
 	int  door_x;
 	
@@ -63,20 +51,16 @@ struct s_map
 	int 	i;
 };
 
-void invalid_map();
-void invalid_game();
-void system_error();
+void error(char *str);
 void free2D(char ***map);
-void swap_data(struct s_map *data,struct s_render *render);
-void allocate_2d(struct s_map *data, int i);
-int	 init_render(struct s_render *render);
-void init_map(struct s_map *data);
+void allocate_2d(struct s_data *data, int i);
+void init_map(struct s_data *data);
 int  validpath(char *path);
-int	 read_file(struct s_map *data, int fd);
-void border_check(struct s_map *data, int i);
-void algo(int y, int x, struct s_map *data);
-int  move_player(struct s_render *render, int keycode);
-int  joingame(struct s_map *data, struct s_render *render);
-void render_game(struct s_render *render, int y, int x);
+int	read_file(struct s_data *data, int fd, char *buff, char *temp);
+void border_check(struct s_data *data, int i);
+void algo(int y, int x, struct s_data *data);
+int  move_player(struct s_data *data, int keycode);
+int  joingame(struct s_data *data);
+void render_game(struct s_data *data, int y, int x);
 
 #endif

@@ -1,27 +1,31 @@
 
 #include "so_long.h"
 
+void f()
+{
+    system("leaks a.out");
+}
 int main(void)
 {
-    struct s_map *data;
-    struct s_render *render;
+    atexit(f);
+
+    struct s_data *data;
 
     data = NULL;
-    render = NULL;
 
-    data = malloc (sizeof(struct s_map));
-    render = malloc (sizeof(struct s_render));
+    data = malloc (sizeof(struct s_data));
 
     init_map(data);
 
     data->map_path = "maps/dev.ber";
 
     if (validpath(data->map_path))
-        invalid_map();
-
-    if (joingame(data, render))
         exit(1);
 
-    mlx_loop(render->mlx);
+    if (joingame(data))
+        exit(1);
+
+    mlx_loop(data->mlx);
     return (0);
 }
+

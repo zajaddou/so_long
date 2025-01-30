@@ -6,13 +6,13 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 04:53:51 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 06:50:37 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static void fill_map(struct s_map *data, char ***map, int x, int y)
+static void fill_map(struct s_data *data, char ***map, int x, int y)
 {
     int i;
 
@@ -43,18 +43,18 @@ static void fill_map(struct s_map *data, char ***map, int x, int y)
     }
     (*map)[y] = NULL;
 }
-void border_check(struct s_map *data, int i)
+void border_check(struct s_data *data, int i)
 {
     while (i < data->h)
         if (data->map_2d[i][0] != '1' || data->map_2d[i++][data->h-1] != '1')
-            invalid_map();
+            error(" invalid border !");
     i = 0;
     while (i < data->w)
        if (data->map_2d[0][i] != '1' || data->map_2d[data->w-1][i++] != '1')
-            invalid_map();
+            error(" invalid border !");
 }
 
-void algo(int y, int x, struct s_map *data)
+void algo(int y, int x, struct s_data *data)
 {
     if (data->map_2d[y][x] == '1' || data->map_2d[y][x] == 'X')
         return;
@@ -71,13 +71,18 @@ void algo(int y, int x, struct s_map *data)
     algo(y, x-1, data);
 }
 
-void allocate_2d(struct s_map *data, int i)
+void allocate_2d(struct s_data *data, int i)
 {
     data->map_2d = (char **)malloc((data->h + 1) * sizeof(char *));
     if (!data->map_2d)
-        system_error();
+        error(" Failed to allocate ( data->map_2d ) !");
     i = 0;
     while (i < data->h)
-        data->map_2d[i++] = (char *)malloc((data->w + 1) * sizeof(char ));
+    {
+        data->map_2d[i] = (char *)malloc((data->w + 1) * sizeof(char ));
+        if (!data->map_2d[i])
+           free2D(&data->map_2d);
+        i++;
+    }
     fill_map(data, &data->map_2d, 0, 0);
 }

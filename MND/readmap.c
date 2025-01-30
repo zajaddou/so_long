@@ -6,13 +6,13 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 04:03:27 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 06:09:58 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-static int	scanline(char *line, struct s_map *data)
+static int	scanline(char *line, struct s_data *data)
 {
 	int	i;
 
@@ -30,9 +30,8 @@ static int	scanline(char *line, struct s_map *data)
 	return (i);
 }
 
-int	read_file(struct s_map *data, int fd)
+int	read_file(struct s_data *data, int fd, char *buff, char *temp)
 {
-	char	*buff;
 	
 	fd = open(data->map_path, O_RDONLY);
 	if (fd < 0)
@@ -45,8 +44,10 @@ int	read_file(struct s_map *data, int fd)
 			return (1);
 		data->h++;
 		data->w = scanline(buff, data);
+		temp = data->map;
 		data->map = ft_strjoin(data->map, buff);
 		free(buff);
+		free(temp);
 		buff = NULL;
 		if ((data->ow != data->w) && data->ow > 0)
 			return (close(fd), free(data->map), data->map = NULL, 1);
