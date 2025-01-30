@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:20:59 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 06:03:57 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 04:56:12 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,10 @@ static int key_handler(int keycode, struct s_render *render)
     return 0;
 }
 
-int joingame(struct s_map *data, struct s_render *render)
+void swap_data(struct s_map *data,struct s_render *render)
 {
-
-    if (makemap(data)) 
-        return (1);
-
-    if (init_render(render))
-        return (1);
-
     render->mlx = mlx_init();
     render->win = mlx_new_window(render->mlx, data->w*64, data->h*64, "so_long");
-
     render->w = data->w;
     render->h = data->h;
     render->px = data->px;
@@ -79,6 +71,32 @@ int joingame(struct s_map *data, struct s_render *render)
     render->map_2d = data->map_2d;
     render->door_y = data->door_y;
     render->door_x = data->door_x;
+}
+
+int joingame(struct s_map *data, struct s_render *render)
+{
+
+    if (read_file(data, 0) && !data->map)
+        invalid_map();
+    
+    allocate_2d(data, 0);
+    
+    border_check(data, 0);
+
+    algo(data->py, data->px, data);
+    
+    free2D(&data->map_2d);
+
+    allocate_2d(data, 0);
+    
+    if ((data->found_p != data->p) || (data->found_c != data->c) || (data->found_e != data->e))
+        invalid_game();
+
+    if (init_render(render))
+        return (1);
+
+    swap_data(data, render);
+    
     render_game(render, 0, 0);
 
     mlx_key_hook(render->win, (int (*)())key_handler, render);

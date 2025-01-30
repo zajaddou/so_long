@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 07:02:51 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 04:53:51 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,18 @@ static void fill_map(struct s_map *data, char ***map, int x, int y)
     }
     (*map)[y] = NULL;
 }
-static int border_check(struct s_map *data, int i)
+void border_check(struct s_map *data, int i)
 {
     while (i < data->h)
-        if (data->map_2d[i][0] != '1' || data->map_2d[i++][data->w-1] != '1')
-            exit(1);
+        if (data->map_2d[i][0] != '1' || data->map_2d[i++][data->h-1] != '1')
+            invalid_map();
     i = 0;
     while (i < data->w)
-        if (data->map_2d[0][i] != '1' || data->map_2d[i++][data->h-1] != '1')
-            exit(1);
-    return (0);
+       if (data->map_2d[0][i] != '1' || data->map_2d[data->w-1][i++] != '1')
+            invalid_map();
 }
 
-static void algo(int y, int x, struct s_map *data)
+void algo(int y, int x, struct s_map *data)
 {
     if (data->map_2d[y][x] == '1' || data->map_2d[y][x] == 'X')
         return;
@@ -72,37 +71,13 @@ static void algo(int y, int x, struct s_map *data)
     algo(y, x-1, data);
 }
 
-int allocate_2d(struct s_map *data, int i)
+void allocate_2d(struct s_map *data, int i)
 {
     data->map_2d = (char **)malloc((data->h + 1) * sizeof(char *));
+    if (!data->map_2d)
+        system_error();
     i = 0;
     while (i < data->h)
         data->map_2d[i++] = (char *)malloc((data->w + 1) * sizeof(char ));
-
     fill_map(data, &data->map_2d, 0, 0);
-    return (0);
-}
-
-int makemap(struct s_map *data)
-{
-    
-    if (is_valid(data))
-        exit(1);
-    
-    if (allocate_2d(data, 0))
-        exit(1);
-    
-    if (border_check(data, 0))
-        exit(1);
-    
-    algo(data->py, data->px, data);
-    free(data->map_2d);
-
-    if (allocate_2d(data, 0))
-        exit(1);
-    
-    if ((data->found_p != data->p) || (data->found_c != data->c) || (data->found_e != data->e))
-        exit(1);
-
-    return (0);
 }

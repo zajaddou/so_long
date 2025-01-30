@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 07:23:56 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 06:11:19 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 04:08:36 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int detect_key(int keycode, int *y, int *x)
 {
+    printf("%d\n",keycode);
     if (keycode == 123) 
         (*x)--;
     else if (keycode == 124) 
@@ -36,11 +37,8 @@ static int detect_block(int *y, int *x, struct s_render *render)
     return (0);
 }
 
-static int move_to(int keycode, struct s_render *render)
+static int move_to(int keycode, struct s_render *render, int y, int x)
 {
-    int x = render->px;
-    int y = render->py;
-
     detect_key(keycode, &y, &x);
     
     if (detect_block(&y, &x, render))
@@ -59,13 +57,8 @@ static int move_to(int keycode, struct s_render *render)
 
 int move_player(struct s_render *render, int keycode)
 {
-    
-    if (move_to(keycode, render))
-        return (1);
-
-    mlx_clear_window(render->mlx, render->win);
-
+    if (!move_to(keycode, render, render->py, render->px))
+        mlx_clear_window(render->mlx, render->win);
     render_game(render, 0, 0);
-    
     return (0);
 }

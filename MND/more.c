@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 02:26:53 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 05:50:07 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 04:37:51 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,33 @@ void	init_map(struct s_map *data)
 	data->map_2d = NULL;
 }
 
-void seg(void)
+void free2D(char ***map)
 {
-    printf("\n\n\t\t\t >- NO SEG HERE -< \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-	exit(0);
+    int i;
+    
+    i = 0;
+    if (!map || !*map)
+        return;
+    while ((*map)[i] != NULL)
+        free((*map)[i++]);
+    free(*map);
+    *map = NULL;
+}
+
+void invalid_map()
+{
+	printf("\n invalid map !\n\n");
+	exit(1);
+}
+
+void invalid_game()
+{
+	printf("\n invalid game !\n\n");
+	exit(1);
+}
+
+void system_error()
+{
+	printf("\n System Error !\n\n");
+	exit(1);
 }

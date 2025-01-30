@@ -1,5 +1,5 @@
+
 #include "so_long.h"
-#include <stdio.h>
 
 int main(void)
 {
@@ -15,6 +15,9 @@ int main(void)
     init_map(data);
 
     data->map_path = "maps/dev.ber";
+
+    if (validpath(data->map_path))
+        invalid_map();
 
     if (joingame(data, render))
         exit(1);

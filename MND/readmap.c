@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/29 07:05:23 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 04:03:27 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	scanline(char *line, struct s_map *data)
 	return (i);
 }
 
-static int	readfile(struct s_map *data, int fd)
+int	read_file(struct s_map *data, int fd)
 {
 	char	*buff;
 	
@@ -57,7 +57,7 @@ static int	readfile(struct s_map *data, int fd)
 	return (0);
 }
 
-static int validpath(char *path)
+int validpath(char *path)
 {
     size_t len;
     size_t i;
@@ -81,13 +81,3 @@ static int validpath(char *path)
     return (0);
 }
 
-int is_valid(struct s_map *data)
-{
-	if (validpath(data->map_path) == 1)
-        return (1);
-		
-    if ((readfile(data, 0) == 1) && (data->map == NULL))
-        return (1);
-
-    return (0);
-}
