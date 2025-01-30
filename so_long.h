@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 11:56:26 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:37:11 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
-
-# include <stdio.h>
 
 struct s_data
 {
@@ -38,7 +36,7 @@ struct s_data
 	int 	found_p;
 	int 	found_c;
 	int 	found_e;
-	
+	int 	open;
 	int		h;
 	int		w;
 	int		py;
@@ -60,7 +58,7 @@ int	read_file(struct s_data *data, int fd, char *buff, char *temp);
 void border_check(struct s_data *data, int i);
 void algo(int y, int x, struct s_data *data);
 int  move_player(struct s_data *data, int keycode);
-int  joingame(struct s_data *data);
+int  start_game(struct s_data *data);
 void render_game(struct s_data *data, int y, int x);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   makemap.c                                          :+:      :+:    :+:   */
+/*   fun_mnd1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 09:56:46 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:13:43 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_map(struct s_data *data)
 	data->found_p = 0;
 	data->found_c = 0;
 	data->found_e = 0;
+    data->open = 0;
 	data->mlx = NULL;
 	data->win = NULL;
 	data->map = NULL;

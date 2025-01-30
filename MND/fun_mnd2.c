@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 12:23:32 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:40:32 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static int move_to(int keycode, struct s_data *data, int y, int x)
     if (data->map_2d[y][x] == '1')
         return (1);
     else if (data->map_2d[y][x] == 'C')
+    {
         data->c--;
+        if (data->c == 0)
+            data->open = 1;
+    }
     else if (data->map_2d[y][x] == 'E' && data->c == 0)
         return (write(1, "\n\n > - You Win :) - <  \n\n",25),exit(0),1);
     data->map_2d[data->py][data->px] = '0';
@@ -42,7 +46,9 @@ int move_player(struct s_data *data, int keycode)
     static int moves;
     if (move_to(keycode, data, data->py, data->px) == 0)
     {
-        printf(" Move : %d\n",++moves);
+        write(1 ," Move : ", 9);
+        ft_putnbr_fd(++moves, 1);
+        write(1 ,"\n", 1);
         mlx_clear_window(data->mlx, data->win); 
     }
     render_game(data, 0, 0);
@@ -106,11 +112,7 @@ int valid_path(char *path, int len, int i, int e)
     i = len - 1;
     e = 3;
     while (e >= 0)
-    {
-        if (path[i] != ext[e])
+        if (path[i--] != ext[e--])
             return (1);
-        i--;
-        e--;
-    }
     return (0);
 }

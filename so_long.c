@@ -6,7 +6,7 @@ void leak(){
 }
 int main(int ac, char **av)
 {
-    //atexit(leak);
+    atexit(leak);
 
     struct s_data *data;
 
@@ -19,7 +19,7 @@ int main(int ac, char **av)
     
     if (valid_path(data->map_path, 0, 0, 0))
         exit(1);
-    if (joingame(data))
+    if (start_game(data))
         exit(1);
     mlx_loop(data->mlx);
     return (0);

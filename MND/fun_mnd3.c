@@ -6,25 +6,11 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:20:59 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 13:41:41 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:37:22 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-void border_check(struct s_data *data, int i)
-{
-    if (!(data->p == 1 && data->c >= 1 && data->e == 1))
-        error(" invalid game !");
-
-    while (i < data->h)
-        if (data->map_2d[i][0] != '1' || data->map_2d[i++][data->w-1] != '1')
-            error(" invalid border !");
-    i = 0;
-    while (i < data->w)
-        if (data->map_2d[0][i] != '1' || data->map_2d[data->h-1][i++] != '1')
-            error(" invalid border !");
-}
 
 static void setblock(struct s_data *data, char *xmp, int x, int y)
 {
@@ -32,6 +18,14 @@ static void setblock(struct s_data *data, char *xmp, int x, int y)
     
     img = mlx_xpm_file_to_image(data->mlx, xmp, &data->w, &data->h);
     mlx_put_image_to_window(data->mlx, data->win, img, 64*x, 64*y);
+}
+
+void is_open(struct s_data *data, int y, int x)
+{
+    if (data->open)
+        setblock(data,"./textures/door_open.xpm", x, y);
+    else
+        setblock(data,"./textures/door.xpm", x, y);
 }
 
 void render_game(struct s_data *data, int y, int x)
@@ -56,7 +50,7 @@ void render_game(struct s_data *data, int y, int x)
                 setblock(data, "./textures/coin.xpm", x, y);
             }
             else if (c == 'E')
-                setblock(data,"./textures/door_open.xpm", x, y);
+                is_open(data, y, x);
             x++;
         }
         y++;
@@ -78,10 +72,10 @@ static int key_handler(int keycode, struct s_data *data)
     return (0);
 }
 
-int joingame(struct s_data *data)
+int start_game(struct s_data *data)
 {
     if (read_file(data, 0, NULL, NULL) && !data->map)
-        error(" Empty file !");
+        error(" invalid file !");
     allocate_2d(data, 0);
     border_check(data, 0);
     algo(data->py, data->px, data);
