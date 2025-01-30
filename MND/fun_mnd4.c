@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 02:26:53 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 16:08:36 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:32:20 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,20 @@ void	border_check(struct s_data *data, int i)
 	while (i < data->w)
 		if (data->map_2d[0][i] != '1' || data->map_2d[data->h - 1][i++] != '1')
 			error(" invalid border !");
+}
+
+void fast_render(t_data *data, int y, int x)
+{
+    while (data->map_2d[y])
+    {
+        x = 0;
+        while (data->map_2d[y][x])
+        {
+            if (data->map_2d[y][x] != data->map_2d_new[y][x])
+                set_image(data, y, x, data->map_2d_new[y][x]);
+			data->map_2d[y][x] = data->map_2d_new[y][x];
+            x++;
+        }
+        y++;
+    }
 }

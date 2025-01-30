@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 16:16:53 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:34:54 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	init_map(t_data *data)
 	data->found_p = 0;
 	data->found_c = 0;
 	data->found_e = 0;
-	data->open = 0;
 	data->mlx = NULL;
 	data->win = NULL;
 	data->map = NULL;
 	data->map_2d = NULL;
+	data->map_2d_new = NULL;
 }
 
 void	free2d(char ***map)
@@ -49,8 +49,10 @@ void	free2d(char ***map)
 	*map = NULL;
 }
 
-static void	fill_map(t_data *data, int i, int x, int y)
+void	fill_map(t_data *data, char ***map, int i, int y)
 {
+	int x;
+	
 	while (y < data->h)
 	{
 		x = 0;
@@ -66,16 +68,15 @@ static void	fill_map(t_data *data, int i, int x, int y)
 				data->door_x = x;
 				data->door_y = y;
 			}
-			if (x == data->w)
-				(data->map_2d)[y][x] = '\0';
-			else
-				(data->map_2d)[y][x] = data->map[i];
-			i++;
+			(*map)[y][x] = '\0';
+			if (x != data->w)
+				(*map)[y][x] = data->map[i];
 			x++;
+			i++;
 		}
 		y++;
 	}
-	(data->map_2d)[y] = NULL;
+    (*map)[y] = NULL;
 }
 
 void	algo(int y, int x, t_data *data)
@@ -95,18 +96,28 @@ void	algo(int y, int x, t_data *data)
 	algo(y, x - 1, data);
 }
 
-void	allocate_2d(t_data *data, int i)
+void allocate_2d(t_data *data, char ***map)
 {
-	data->map_2d = (char **)malloc((data->h + 1) * sizeof(char *));
-	if (!data->map_2d)
-		error(" Failed to allocate ( data->map_2d ) !");
-	i = 0;
-	while (i < data->h)
-	{
-		data->map_2d[i] = (char *)malloc((data->w + 1) * sizeof(char ));
-		if (!data->map_2d[i])
-			free2d(&data->map_2d);
-		i++;
-	}
-	fill_map(data, 0, 0, 0);
+    int i;
+
+    if (*map != NULL)
+        error(" You have data ( data->map_2d ) !");
+
+    *map = (char **)malloc((data->h + 1) * sizeof(char *));
+    if (!*map)
+        error(" Failed to allocate ( data->map_2d ) !");
+
+    i = 0;
+    while (i < data->h)
+    {
+        (*map)[i] = (char *)malloc((data->w + 1) * sizeof(char));
+        if (!(*map)[i])
+        {
+            free2d(map);
+            return;
+        }
+        i++;
+    }
+    (*map)[data->h] = NULL;
 }
+
