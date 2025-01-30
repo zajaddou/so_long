@@ -2,11 +2,11 @@
 #include "so_long.h"
 
 void leak(){
-    system("leaks a.out");
+    system("leaks so_long");
 }
 int main(int ac, char **av)
 {
-    atexit(leak);
+    // atexit(leak);
 
     struct s_data *data;
 
