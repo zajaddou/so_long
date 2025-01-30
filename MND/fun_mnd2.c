@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 10:03:09 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:23:32 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int move_to(int keycode, struct s_data *data, int y, int x)
     else if (data->map_2d[y][x] == 'C')
         data->c--;
     else if (data->map_2d[y][x] == 'E' && data->c == 0)
-        return (write(1, " You Win :) \n",13),exit(0),1);
+        return (write(1, "\n\n > - You Win :) - <  \n\n",25),exit(0),1);
     data->map_2d[data->py][data->px] = '0';
     if (data->map_2d[data->door_y][data->door_x] == '0')
         data->map_2d[data->door_y][data->door_x] = 'E';
@@ -49,7 +49,7 @@ int move_player(struct s_data *data, int keycode)
     return (0);
 }
 
-static int	scanline(char *line, struct s_data *data)
+static int  scan_line(char *line, struct s_data *data)
 {
 	int	i;
 
@@ -62,6 +62,8 @@ static int	scanline(char *line, struct s_data *data)
 			data->p++;
 		else if (line[i] == 'C')
 			data->c++;
+        else if (line[i] != '0' && line[i] != '1')
+			error(" invalid entity !");
 		i++;
 	}
 	return (i);
@@ -69,18 +71,16 @@ static int	scanline(char *line, struct s_data *data)
 
 int	read_file(struct s_data *data, int fd, char *buff, char *temp)
 {
-	
 	fd = open(data->map_path, O_RDONLY);
 	if (fd < 0)
-		return (1);
-		
+		error(" File not found !");
 	while (1)
 	{
 		buff = get_next_line(fd);
 		if (!buff)
 			return (1);
 		data->h++;
-		data->w = scanline(buff, data);
+		data->w = scan_line(buff, data);
 		temp = data->map;
 		data->map = ft_strjoin(data->map, buff);
 		free(buff);
@@ -93,27 +93,24 @@ int	read_file(struct s_data *data, int fd, char *buff, char *temp)
 	return (0);
 }
 
-int validpath(char *path)
+int valid_path(char *path, int len, int i, int e)
 {
-    int len;
-    int i;
-    int b;
     char *ext;
 
     ext = ".ber";
     if (!path)
-        return (1);
+        error(" invalid file !");
     len = ft_strlen(path);
     if (len < 4)
-        return (1);
+        error(" invalid file !");
     i = len - 1;
-    b = 3;
-    while (b >= 0)
+    e = 3;
+    while (e >= 0)
     {
-        if (path[i] != ext[b])
+        if (path[i] != ext[e])
             return (1);
         i--;
-        b--;
+        e--;
     }
     return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   fun_mnd3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:20:59 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 09:55:05 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:41:41 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,14 @@
 void border_check(struct s_data *data, int i)
 {
     if (!(data->p == 1 && data->c >= 1 && data->e == 1))
-        error(" invalid entity !");
+        error(" invalid game !");
+
     while (i < data->h)
-        if (data->map_2d[i][0] != '1' || data->map_2d[i++][data->h-1] != '1')
+        if (data->map_2d[i][0] != '1' || data->map_2d[i++][data->w-1] != '1')
             error(" invalid border !");
     i = 0;
     while (i < data->w)
-        if (data->map_2d[0][i] != '1' || data->map_2d[data->w-1][i++] != '1')
+        if (data->map_2d[0][i] != '1' || data->map_2d[data->h-1][i++] != '1')
             error(" invalid border !");
 }
 
@@ -55,7 +56,7 @@ void render_game(struct s_data *data, int y, int x)
                 setblock(data, "./textures/coin.xpm", x, y);
             }
             else if (c == 'E')
-                setblock(data,"./textures/door.xpm", x, y);
+                setblock(data,"./textures/door_open.xpm", x, y);
             x++;
         }
         y++;
@@ -80,7 +81,7 @@ static int key_handler(int keycode, struct s_data *data)
 int joingame(struct s_data *data)
 {
     if (read_file(data, 0, NULL, NULL) && !data->map)
-        exit (1);
+        error(" Empty file !");
     allocate_2d(data, 0);
     border_check(data, 0);
     algo(data->py, data->px, data);

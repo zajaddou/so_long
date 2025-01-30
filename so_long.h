@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 06:46:51 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:56:26 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "LIBFT/libft.h"
 
 # include <mlx.h>
-# include <fcntl.h>
+# include <fcntl.h> 
 # include <stdlib.h>
 # include <limits.h>
 # include <unistd.h>
@@ -55,7 +55,7 @@ void error(char *str);
 void free2D(char ***map);
 void allocate_2d(struct s_data *data, int i);
 void init_map(struct s_data *data);
-int  validpath(char *path);
+int valid_path(char *path, int len, int i, int e);
 int	read_file(struct s_data *data, int fd, char *buff, char *temp);
 void border_check(struct s_data *data, int i);
 void algo(int y, int x, struct s_data *data);
