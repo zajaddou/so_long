@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/03 08:30:16 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 23:30:13 by zajaddou         ###   ########.fr       */
+/*   Created: 2025/01/30 22:41:40 by zajaddou          #+#    #+#             */
+/*   Updated: 2025/01/30 22:57:36 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../so_long.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	algo(int y, int x, t_data *data)
 {
-	char	c;
-
-	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
+	if (data->map_2d[y][x] == '1' || data->map_2d[y][x] == 'X')
 		return ;
-	}
-	if (n < 0)
-	{
-		write(fd, "-", 1);
-		n = -n;
-	}
-	if (n >= 10)
-		ft_putnbr_fd(n / 10, fd);
-	c = (n % 10) + '0';
-	write(fd, &c, 1);
+	if (data->map_2d[y][x] == 'P')
+		data->found_p++;
+	else if (data->map_2d[y][x] == 'C')
+		data->found_c++;
+	else if (data->map_2d[y][x] == 'E')
+		data->found_e++;
+	data->map_2d[y][x] = 'X';
+	algo(y + 1, x, data);
+	algo(y - 1, x, data);
+	algo(y, x + 1, data);
+	algo(y, x - 1, data);
 }

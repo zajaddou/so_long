@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fun_mnd3.c                                         :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:20:59 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 18:36:37 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 23:24:10 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	set_block(t_data *data, char *xmp, int x, int y)
+void	set_xmp(t_data *data, char *xmp, int x, int y)
 {
 	void	*img;
 
 	img = mlx_xpm_file_to_image(data->mlx, xmp, &data->w, &data->h);
-	mlx_put_image_to_window(data->mlx, data->win, img, 64 * x, 64 * y);
+	mlx_put_image_to_window(data->mlx, data->win, img, 32 * x, 32 * y);
 }
 
-void set_image(t_data *data, int y, int x, char c)
+void	set_image(t_data *data, int y, int x, char c)
 {
 	if (c == '1')
-		set_block(data, "./textures/wall.xpm", x, y);
+		set_xmp(data, "./textures/wall.xpm", x, y);
 	else if (c == '0')
-		set_block(data, "./textures/floor.xpm", x, y);
+		set_xmp(data, "./textures/floor.xpm", x, y);
 	else if (c == 'P')
-		set_block(data, "./textures/player.xpm", x, y);
+		set_xmp(data, "./textures/player.xpm", x, y);
 	else if (c == 'C')
 	{
-		set_block(data, "./textures/floor.xpm", x, y);
-		set_block(data, "./textures/coin.xpm", x, y);
+		set_xmp(data, "./textures/floor.xpm", x, y);
+		set_xmp(data, "./textures/coin.xpm", x, y);
 	}
 	else if (c == 'E')
-		set_block(data, "./textures/door.xpm", x, y);
+		set_xmp(data, "./textures/door.xpm", x, y);
 }
 
 void	first_render(t_data *data, int y, int x, char c)
@@ -53,19 +53,20 @@ void	first_render(t_data *data, int y, int x, char c)
 	}
 }
 
-static int	key_handler(int keycode, t_data *data)
+void	fast_render(t_data *data, int y, int x)
 {
-	if (keycode == 53)
+	while (data->map_2d[y])
 	{
-		mlx_destroy_window(data->mlx, data->win);
-		free(data->map);
-		free2d(&data->map_2d);
-		free(data);
-		exit(0);
+		x = 0;
+		while (data->map_2d[y][x])
+		{
+			if (data->map_2d[y][x] != data->map_2d_new[y][x])
+				set_image(data, y, x, data->map_2d_new[y][x]);
+			data->map_2d[y][x] = data->map_2d_new[y][x];
+			x++;
+		}
+		y++;
 	}
-	else
-		move_player(data, keycode);
-	return (0);
 }
 
 void	start_game(t_data *data)
@@ -85,8 +86,9 @@ void	start_game(t_data *data)
 		|| data->found_c != data->c || data->found_e != data->e)
 		error(" invalid road !");
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, data->w * 64,
-			data->h * 64, "so_long");
+	data->win = mlx_new_window(data->mlx, data->w * 32,
+			data->h * 32, "so_long");
 	first_render(data, 0, 0, '0');
 	mlx_key_hook(data->win, (int (*)())key_handler, data);
+	mlx_hook(data->win, 17, 0, (int (*)())game_exit, data);
 }

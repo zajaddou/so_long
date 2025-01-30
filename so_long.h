@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 18:36:12 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/30 23:29:25 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # include <fcntl.h> 
 # include <stdlib.h>
 # include <limits.h>
-# include <unistd.h>
-
-# include <stdio.h>
 
 typedef struct s_data
 {
@@ -45,25 +42,30 @@ typedef struct s_data
 	int		e;
 	int		fd;
 	int		ow;
-	int		i;
 }	t_data;
+
+void	start_game(t_data *data);
+void	game_exit(t_data *data);
 
 void	error(char *str);
 void	free2d(char ***map);
 void	allocate_2d(t_data *data, char ***map);
+
+int		read_file(t_data *data, int fd, char *buff, char *temp);
 void	init_map(t_data *data);
 void	fill_map(t_data *data, char ***map, int i, int y);
-int		read_file(t_data *data, int fd, char *buff, char *temp);
-int		valid_path(char *path, int len, int i, int e);
-void	border_check(struct s_data *data, int i);
+
 void	algo(int y, int x, t_data *data);
-void	set_block(t_data *data, char *xmp, int x, int y);
-int		move_player(t_data *data, int keycode);
-void	start_game(t_data *data);
+
+int		path_check(char *path, int len, int i, int e);
+int		entity_check(char *line, t_data *data);
+void	border_check(struct s_data *data, int i);
+
+int		key_handler(int keycode, t_data *data);
 
 void	first_render(t_data *data, int y, int x, char c);
-
-void	set_image(t_data *data, int y, int x, char c);
 void	fast_render(t_data *data, int y, int x);
+void	set_xmp(t_data *data, char *xmp, int x, int y);
+void	set_image(t_data *data, int y, int x, char c);
 
 #endif

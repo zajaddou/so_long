@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 MLX= -lmlx -framework OpenGL -framework AppKit
 CC = cc
 
-SRCS = MND/fun_mnd1.c MND/fun_mnd2.c MND/fun_mnd3.c MND/fun_mnd4.c
+SRCS = MND/render.c MND/algo.c MND/control.c MND/check.c MND/more.c MND/readfile.c MND/fillmap.c
 
 OBJS = $(SRCS:.c=.o)
 
