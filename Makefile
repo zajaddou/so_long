@@ -45,7 +45,7 @@ fclean: clean
 
 re: fclean all
 
-run : fclean all
-	clear && ./so_long "maps/dev.ber"
+run : bonus
+	clear && ./so_long_bonus "maps/map.ber"
 
 .PHONY: all clean fclean re bonus

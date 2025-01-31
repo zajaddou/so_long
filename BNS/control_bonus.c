@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 10:21:26 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:29:45 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ static int	move_player(t_data *data, int keycode)
 	if (move_to(keycode, data, data->py, data->px))
 		return (1);
 	fast_render(data, 0, 0);
-	write(1, " Move : ", 9);
-	ft_putnbr_fd(++moves, 1);
-	write(1, "\n", 1);
+	number_render(data, ++moves);
 	return (0);
 }
 

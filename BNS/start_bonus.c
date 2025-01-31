@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
+/*   start_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:23:04 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 10:26:13 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:52:27 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	start_game(t_data *data)
 	data->win = mlx_new_window(data->mlx, data->w * 32,
 			data->h * 32, "so_long");
 	first_render(data, 0, 0, '0');
+	mlx_string_put(data->mlx, data->win, 10, 5, 0xFFFFFF, "Moves 0");
 	mlx_key_hook(data->win, key_handler, data);
 	mlx_hook(data->win, 17, 0, game_exit, data);
 }

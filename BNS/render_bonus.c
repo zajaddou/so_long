@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:20:59 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 10:31:53 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:50:06 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,17 @@ void	fast_render(t_data *data, int y, int x)
 		}
 		y++;
 	}
+}
+
+void	number_render(t_data *data, int number)
+{
+	char	*move_str;
+
+	set_xmp(data, "./textures/wall.xpm", 2, 0);
+	set_xmp(data, "./textures/wall.xpm", 3, 0);
+	move_str = ft_itoa(number);
+	if (!move_str)
+		return ;
+	mlx_string_put(data->mlx, data->win, 70, 5, 0xFFFFFF, move_str);
+	free(move_str);
 }

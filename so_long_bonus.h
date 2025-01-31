@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 10:50:05 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:28:49 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,8 @@ void	first_render(t_data *data, int y, int x, char c);
 void	fast_render(t_data *data, int y, int x);
 void	set_xmp(t_data *data, char *xmp, int x, int y);
 void	set_image(t_data *data, int y, int x, char c);
+
+// bonus
+void	number_render(t_data *data, int number);
 
 #endif
