@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:23:04 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 13:35:13 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:54:31 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ void	start_game(t_data *data)
 	mlx_string_put(data->mlx, data->win, 10, 5, 0xFFFFFF, "Moves 0");
 	mlx_key_hook(data->win, key_handler, data);
 	mlx_hook(data->win, 17, 0, game_exit, data);
+	mlx_loop(data->mlx);
 }

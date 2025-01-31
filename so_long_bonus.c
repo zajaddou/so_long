@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 00:07:53 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 13:20:58 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:09:50 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ int	main(int ac, char **av)
 	if (path_check(data->map_path, 0, 0, 0))
 		error(" invalid file name !");
 	start_game(data);
-	mlx_loop(data->mlx);
 	return (0);
 }

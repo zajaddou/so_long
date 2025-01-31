@@ -1,56 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monsters_bonus.c                                   :+:      :+:    :+:   */
+/*   animation_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 16:07:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 17:53:15 by zajaddou         ###   ########.fr       */
+/*   Created: 2025/01/31 16:30:38 by zajaddou          #+#    #+#             */
+/*   Updated: 2025/01/31 17:56:00 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 
-void	kill_player(t_data *data)
+static void	set_frame(t_data *data, char *xmp, int x, int y)
 {
-	write(1, "\n\n > ~ You Dead ☠ ~ <  \n\n", 25);
-	game_exit(data);
+	void	*img;
+	
+	usleep(50000);
+	img = mlx_xpm_file_to_image(data->mlx, xmp, &data->w, &data->h);
+	mlx_put_image_to_window(data->mlx, data->win, img, 32 * x, 32 * y);
 }
 
-static void	move_monster(t_data *data, int y, int x, int key)
+int	animation(void *param)
 {
-	int	old_x;
-	int	old_y;
-
-	old_y = y;
-	old_x = x;
-	detect_key(key, &x, &y);
-	if (data->map_2d_new[y][x] == '0')
-	{
-		data->map_2d_new[old_y][old_x] = '0';
-		data->map_2d_new[y][x] = 'M';
-	}
-	else if (data->map_2d_new[y][x] == 'P')
-		kill_player(data);
-}
-
-int	monsters(t_data *data, int key)
-{
+	t_data	*data;
+	static int frame;
 	int	y;
 	int	x;
-
+	
 	y = 0;
+	data = (t_data *)param;
 	while (data->map_2d[y])
 	{
 		x = 0;
 		while (data->map_2d[y][x])
 		{
-			if (data->map_2d[y][x] == 'M')
-				move_monster(data, y, x, key);
+			if (data->map_2d[y][x] == 'C')
+			{
+				if (frame)
+					set_frame(data, "./textures/coin.xpm", x, y);
+				else
+					set_frame(data, "./textures/floor.xpm", x, y);
+			}
 			x++;
 		}
 		y++;
 	}
+	frame = !frame;
 	return (0);
 }
