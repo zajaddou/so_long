@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 00:10:50 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 10:50:05 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include "LIBFT/libft.h"
 
 # include <mlx.h>
-# include <fcntl.h> 
-# include <stdlib.h>
-# include <limits.h>
 
 typedef struct s_data
 {
@@ -45,7 +42,7 @@ typedef struct s_data
 }	t_data;
 
 void	start_game(t_data *data);
-void	game_exit(t_data *data);
+int		game_exit(void *param);
 
 void	error(char *str);
 void	free2d(char ***map);
@@ -61,7 +58,7 @@ int		path_check(char *path, int len, int i, int e);
 int		entity_check(char *line, t_data *data);
 void	border_check(struct s_data *data, int i);
 
-int		key_handler(int keycode, t_data *data);
+int		key_handler(int keycode, void *param);
 
 void	first_render(t_data *data, int y, int x, char c);
 void	fast_render(t_data *data, int y, int x);

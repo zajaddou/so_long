@@ -6,7 +6,7 @@
 #    By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 05:03:47 by zajaddou          #+#    #+#              #
-#    Updated: 2025/01/30 23:16:34 by zajaddou         ###   ########.fr        #
+#    Updated: 2025/01/31 10:03:35 by zajaddou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,12 @@ SRCS = ft_strlen.c \
 	ft_strlcpy.c \
 	ft_strncpy.c \
 	ft_strchr.c \
-	ft_strncmp.c \
 	ft_strdup.c \
 	ft_strjoin.c \
 	ft_strncmp.c \
 	ft_putnbr_fd.c \
-	get_next_line.c
+	get_next_line.c \
+	ft_itoa.c
 
 OBJS = $(SRCS:.c=.o)
 

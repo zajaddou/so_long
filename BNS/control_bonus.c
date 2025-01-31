@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 00:14:48 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 10:21:26 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ static int	move_player(t_data *data, int keycode)
 	return (0);
 }
 
-int	key_handler(int keycode, t_data *data)
+int	key_handler(int keycode, void *param)
 {
+	t_data	*data;
+
+	data = (t_data *)param;
 	if (keycode == 53)
 		game_exit(data);
 	else

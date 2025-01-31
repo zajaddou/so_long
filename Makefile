@@ -9,11 +9,11 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 
 SRCS = MND/render.c MND/algo.c MND/control.c MND/check.c MND/more.c \
-	   MND/readfile.c MND/fillmap.c so_long.c
+	   MND/readfile.c MND/fillmap.c MND/start.c so_long.c
 
-BONUS_SRCS = BNS/render_bonus.c BNS/algo_bonus.c BNS/control_bonus.c \
-			 BNS/more_bonus.c so_long_bonus.c \
-			 MND/readfile.c MND/fillmap.c MND/check.c
+BONUS_SRCS = so_long_bonus.c BNS/render_bonus.c BNS/algo_bonus.c BNS/control_bonus.c \
+			 BNS/more_bonus.c BNS/readfile_bonus.c BNS/fillmap_bonus.c \
+			 BNS/check_bonus.c BNS/start_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
@@ -44,5 +44,8 @@ fclean: clean
 	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
+
+run : fclean all
+	clear && ./so_long "maps/dev.ber"
 
 .PHONY: all clean fclean re bonus

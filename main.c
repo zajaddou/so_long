@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long_bonus.c                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 00:07:53 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 00:23:10 by zajaddou         ###   ########.fr       */
+/*   Created: 2025/01/31 01:13:42 by zajaddou          #+#    #+#             */
+/*   Updated: 2025/01/31 01:29:12 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long_bonus.h"
+#include <mlx.h>
 
-int	main(int ac, char **av)
+int	main(void)
 {
-	t_data	*data;
+	void	*mlx;
+	void	*win;
 
-	if (ac != 2)
-		error(" invalid input !");
-	data = malloc (sizeof(t_data));
-	if (!data)
-		error(" Failed to allocate ( data ) !");
-	data->map_path = av[1];
-	init_map(data);
-	if (path_check(data->map_path, 0, 0, 0))
-		error(" invalid file name !");
-	start_game(data);
-	mlx_loop(data->mlx);
-	return (0);
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_string_put(mlx, win, 300, 200, 0xFFFFFF, "Hello,%d World!");
+	mlx_loop(mlx);
 }

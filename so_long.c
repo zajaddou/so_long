@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:54:31 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 00:09:23 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 10:47:04 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	data = NULL;
 	data = malloc (sizeof(t_data));
 	if (!data)
-		error(" Out of memory !");
+		error(" Failed to allocate ( data ) !");
 	data->map_path = av[1];
 	init_map(data);
 	if (path_check(data->map_path, 0, 0, 0))
