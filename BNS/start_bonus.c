@@ -6,11 +6,11 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:23:04 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 12:52:27 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:35:13 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 void	start_game(t_data *data)
 {
@@ -30,7 +30,7 @@ void	start_game(t_data *data)
 		error(" invalid road !");
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->w * 32,
-			data->h * 32, "so_long");
+			data->h * 32, "so_long bonus");
 	first_render(data, 0, 0, '0');
 	mlx_string_put(data->mlx, data->win, 10, 5, 0xFFFFFF, "Moves 0");
 	mlx_key_hook(data->win, key_handler, data);

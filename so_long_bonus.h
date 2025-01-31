@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 12:28:49 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:21:01 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "LIBFT/libft.h"
 
 # include <mlx.h>
+# include <stdio.h>
 
 typedef struct s_data
 {
@@ -30,6 +31,7 @@ typedef struct s_data
 	int		found_p;
 	int		found_c;
 	int		found_e;
+	int		found_m;
 	int		h;
 	int		w;
 	int		py;
@@ -37,6 +39,7 @@ typedef struct s_data
 	int		p;
 	int		c;
 	int		e;
+	int		m;
 	int		fd;
 	int		ow;
 }	t_data;
@@ -67,5 +70,8 @@ void	set_image(t_data *data, int y, int x, char c);
 
 // bonus
 void	number_render(t_data *data, int number);
+int		monsters(t_data *data, int key);
+int		detect_key(int keycode, int *y, int *x);
+void	kill_player(t_data *data);
 
 #endif

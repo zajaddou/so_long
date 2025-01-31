@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:20:59 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 12:50:06 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:13:28 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	set_image(t_data *data, int y, int x, char c)
 	}
 	else if (c == 'E')
 		set_xmp(data, "./textures/door.xpm", x, y);
+	else if (c == 'M')
+		set_xmp(data, "./textures/monster.xpm", x, y);
 }
 
 void	first_render(t_data *data, int y, int x, char c)

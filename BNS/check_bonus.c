@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 02:26:53 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 00:14:46 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:34:55 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	entity_check(char *line, t_data *data)
 			data->p++;
 		else if (line[i] == 'C')
 			data->c++;
+		else if (line[i] == 'M')
+			data->m++;
 		else if (line[i] != '0' && line[i] != '1')
 			error(" invalid entity !");
 		i++;
@@ -52,7 +54,7 @@ int	path_check(char *path, int len, int i, int e)
 
 void	border_check(struct s_data *data, int i)
 {
-	if (!(data->p == 1 && data->c >= 1 && data->e == 1))
+	if (!(data->p == 1 && data->c >= 1 && data->e == 1 && data->m >= 1))
 		error(" invalid game !");
 	while (i < data->h)
 		if ((data->map_2d[i][0] != '1') || \

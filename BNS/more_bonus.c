@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 11:41:47 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:14:23 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ void	init_map(t_data *data)
 	data->p = 0;
 	data->c = 0;
 	data->e = 0;
+	data->m = 0;
 	data->fd = 0;
 	data->px = 0;
 	data->py = 0;
 	data->found_p = 0;
 	data->found_c = 0;
 	data->found_e = 0;
+	data->found_m = 0;
 	data->mlx = NULL;
 	data->win = NULL;
 	data->map = NULL;
