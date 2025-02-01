@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 02:26:53 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 23:21:59 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:26:19 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ int	path_check(char *path, int len, int i, int e)
 	return (0);
 }
 
-void	border_check(struct s_data *data, int i)
+void	border_check(t_data *data, int i)
 {
-	if (!(data->p == 1 && data->c >= 1 && data->e == 1))
-		error(" invalid game !");
 	while (i < data->h)
 		if ((data->map_2d[i][0] != '1') || \
 		(data->map_2d[i++][data->w - 1] != '1'))
@@ -62,4 +60,12 @@ void	border_check(struct s_data *data, int i)
 	while (i < data->w)
 		if (data->map_2d[0][i] != '1' || data->map_2d[data->h - 1][i++] != '1')
 			error(" invalid border !");
+}
+
+void	game_check(t_data *data)
+{
+	if (data->w > 80 || data->h > 44)
+		error(" invalid size !");
+	if (!(data->p == 1 && data->c >= 1 && data->e == 1))
+		error(" invalid game !");
 }

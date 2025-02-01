@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:23:04 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 11:42:10 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:09:01 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	start_game(t_data *data)
 		error(" invalid file !");
 	allocate_2d(data, &data->map_2d);
 	fill_map(data, &data->map_2d, 0, 0);
+	game_check(data);
 	border_check(data, 0);
 	algo(data->py, data->px, data);
 	free2d(&data->map_2d);

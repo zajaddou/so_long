@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/02/01 09:52:57 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:06:28 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	fill_map(t_data *data, char ***map, int i, int y);
 void	algo(int y, int x, t_data *data);
 int		path_check(char *path, int len, int i, int e);
 int		entity_check(char *line, t_data *data);
-void	border_check(struct s_data *data, int i);
+void	game_check(t_data *data);
+void	border_check(t_data *data, int i);
 int		key_handler(int keycode, void *param);
 void	first_render(t_data *data, int y, int x, char c);
 void	fast_render(t_data *data, int y, int x);
