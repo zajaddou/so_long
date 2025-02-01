@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 17:54:53 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 08:25:27 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ static int	move_to(int keycode, t_data *data, int y, int x)
 		kill_player(data);
 	if (data->map_2d_new[y][x] == 'C')
 	{	
-		mlx_loop_hook(data->mlx, animation, data);
 		data->c--;
 		if (data->c == 0)
 			set_xmp(data, "./textures/open.xpm", data->door_x, data->door_y);
+		if (data->c == 1)
+			mlx_loop_hook(data->mlx, animation, data);
 	}
 	else if (data->map_2d_new[y][x] == 'E' && data->c == 0)
 		return (write(1, "\n\n > - You Win :) - <  \n\n", 25), exit(0), 1);

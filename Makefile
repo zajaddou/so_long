@@ -32,7 +32,7 @@ bonus: $(BONUS_OBJS) $(LIBFT)
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-%.o: %.c so_long.h
+%.o: %.c so_long.h LIBFT/libft.h
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 
 clean:
