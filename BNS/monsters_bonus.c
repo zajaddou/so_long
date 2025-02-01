@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 17:53:15 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 08:35:45 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	kill_player(t_data *data)
 {
-	write(1, "\n\n > ~ You Dead ☠ ~ <  \n\n", 25);
+	write(1, "\n\n > ~ You Dead ☠ ~ <  \n\n", 27);
 	game_exit(data);
 }
 

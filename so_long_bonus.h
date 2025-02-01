@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 16:49:48 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 09:17:16 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "LIBFT/libft.h"
 
 # include <mlx.h>
-# include <stdio.h>
 
 typedef struct s_data
 {

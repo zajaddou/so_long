@@ -3,13 +3,11 @@ NAME = so_long
 BONUS_NAME = so_long_bonus
 
 CC = cc
+MLX = -lmlx -framework OpenGL -framework AppKit
 CFLAGS = -Wall -Wextra -Werror
 
-MLX = -lmlx -framework OpenGL -framework AppKit
-
-
-SRCS = MND/render.c MND/algo.c MND/control.c MND/check.c MND/more.c \
-	   MND/readfile.c MND/fillmap.c MND/start.c so_long.c
+SRCS = so_long.c MND/render.c MND/algo.c MND/control.c MND/check.c MND/more.c \
+	   MND/readfile.c MND/fillmap.c MND/start.c 
 
 BONUS_SRCS = so_long_bonus.c BNS/render_bonus.c BNS/algo_bonus.c BNS/control_bonus.c \
 			 BNS/more_bonus.c BNS/readfile_bonus.c BNS/fillmap_bonus.c \
@@ -45,7 +43,4 @@ fclean: clean
 
 re: fclean all
 
-run : bonus
-	clear && ./so_long_bonus "maps/bonus.ber"
-
-.PHONY: all clean fclean re bonus
+.PHONY: clean
