@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 16:17:36 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 09:53:07 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,17 @@ typedef struct s_data
 
 void	start_game(t_data *data);
 int		game_exit(void *param);
-
 void	error(char *str);
 void	free2d(char ***map);
 void	allocate_2d(t_data *data, char ***map);
-
 int		read_file(t_data *data, int fd, char *buff, char *temp);
 void	init_map(t_data *data);
 void	fill_map(t_data *data, char ***map, int i, int y);
-
 void	algo(int y, int x, t_data *data);
-
 int		path_check(char *path, int len, int i, int e);
 int		entity_check(char *line, t_data *data);
 void	border_check(struct s_data *data, int i);
-
 int		key_handler(int keycode, void *param);
-
 void	first_render(t_data *data, int y, int x, char c);
 void	fast_render(t_data *data, int y, int x);
 void	set_xmp(t_data *data, char *xmp, int x, int y);

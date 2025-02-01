@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 22:56:46 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/30 22:57:02 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 12:23:58 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	read_file(t_data *data, int fd, char *buff, char *temp)
 	{
 		buff = get_next_line(fd);
 		if (!buff)
-			return (1);
+			return (close(fd), 1);
 		data->h++;
 		data->w = entity_check(buff, data);
 		temp = data->map;

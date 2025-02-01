@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 09:15:30 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 13:14:23 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:59:24 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	game_exit(void *param)
 	mlx_destroy_window(data->mlx, data->win);
 	free(data->map);
 	free2d(&data->map_2d);
+	free2d(&data->map_2d_new);
 	free(data);
 	exit(0);
 }

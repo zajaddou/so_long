@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 02:38:13 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/02/01 08:25:27 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:22:58 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	move_to(int keycode, t_data *data, int y, int x)
 	if (data->map_2d_new[y][x] == 'M')
 		kill_player(data);
 	if (data->map_2d_new[y][x] == 'C')
-	{	
+	{
 		data->c--;
 		if (data->c == 0)
 			set_xmp(data, "./textures/open.xpm", data->door_x, data->door_y);
