@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:54:31 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/01/31 11:38:32 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/02 07:03:20 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		error(" invalid input !");
-	data = NULL;
 	data = malloc (sizeof(t_data));
 	if (!data)
 		error(" Failed to allocate ( data ) !");

@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/02/02 05:12:53 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/02 07:09:23 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ static void	move_monster(t_data *data, int y, int x)
 
 	old_y = y;
 	old_x = x;
-	if (data->c == 1)
-		animation(data);
 	if (data->py > y)
 		y++;
-	if (data->py < y)
+	else if (data->py < y)
 		y--;
 	if (data->px > x)
 		x++;
-	if (data->px < x)
+	else if (data->px < x)
 		x--;
 	if (old_y != y && old_x != x)
 		return ;
@@ -51,8 +49,10 @@ int	monsters(t_data *data)
 	int	y;
 	int	x;
 
+	if (data->c == 1)
+		animation(data);
 	y = 0;
-	while (data->map_2d[y])
+	while (data->map_2d_new[y])
 	{
 		x = 0;
 		while (data->map_2d[y][x])
@@ -64,6 +64,7 @@ int	monsters(t_data *data)
 		y++;
 	}
 	fast_render(data, 0, 0);
-	usleep(70000);
+	usleep(35000);
+	usleep(35000);
 	return (0);
 }
