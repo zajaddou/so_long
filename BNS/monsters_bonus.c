@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/02/01 08:35:45 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/02 05:07:16 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,25 @@ void	kill_player(t_data *data)
 	game_exit(data);
 }
 
-static void	move_monster(t_data *data, int y, int x, int key)
+static void	move_monster(t_data *data, int y, int x)
 {
 	int	old_x;
 	int	old_y;
-
+	
 	old_y = y;
 	old_x = x;
-	detect_key(key, &x, &y);
+	if (data->c == 1)
+		animation(data);
+    if (data->py > y)
+        y++;
+    if (data->py < y)
+        y--;
+    if (data->px > x)
+        x++;
+    if (data->px < x)
+        x--;
+	if (old_y != y && old_x != x)
+		return ;
 	if (data->map_2d_new[y][x] == '0')
 	{
 		data->map_2d_new[old_y][old_x] = '0';
@@ -35,7 +46,7 @@ static void	move_monster(t_data *data, int y, int x, int key)
 		kill_player(data);
 }
 
-int	monsters(t_data *data, int key)
+int	monsters(t_data *data)
 {
 	int	y;
 	int	x;
@@ -47,10 +58,12 @@ int	monsters(t_data *data, int key)
 		while (data->map_2d[y][x])
 		{
 			if (data->map_2d[y][x] == 'M')
-				move_monster(data, y, x, key);
+				move_monster(data, y, x);
 			x++;
 		}
 		y++;
 	}
+	fast_render(data, 0, 0);
+	usleep(70000);
 	return (0);
 }

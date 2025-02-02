@@ -21,17 +21,17 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
 
+%.o: %.c so_long.h LIBFT/libft.h 
+	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
+
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX) $(LIBFT)
 
-bonus: $(BONUS_OBJS) $(LIBFT)
+bonus: $(BONUS_OBJS) $(LIBFT) so_long_bonus.h
 	$(CC) $(CFLAGS) $(BONUS_OBJS) -o $(BONUS_NAME) $(MLX) $(LIBFT)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
-
-%.o: %.c so_long.h LIBFT/libft.h
-	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)

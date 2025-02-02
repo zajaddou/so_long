@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 20:18:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/02/01 13:06:28 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/01 18:41:45 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	fast_render(t_data *data, int y, int x);
 void	set_xmp(t_data *data, char *xmp, int x, int y);
 void	set_image(t_data *data, int y, int x, char c);
 void	number_render(t_data *data, int number);
-int		monsters(t_data *data, int key);
+int		monsters(t_data *data);
 int		detect_key(int keycode, int *y, int *x);
 void	kill_player(t_data *data);
 int		animation(void *param);
