@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/02/02 05:07:16 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/02 05:12:53 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ static void	move_monster(t_data *data, int y, int x)
 {
 	int	old_x;
 	int	old_y;
-	
+
 	old_y = y;
 	old_x = x;
 	if (data->c == 1)
 		animation(data);
-    if (data->py > y)
-        y++;
-    if (data->py < y)
-        y--;
-    if (data->px > x)
-        x++;
-    if (data->px < x)
-        x--;
+	if (data->py > y)
+		y++;
+	if (data->py < y)
+		y--;
+	if (data->px > x)
+		x++;
+	if (data->px < x)
+		x--;
 	if (old_y != y && old_x != x)
 		return ;
 	if (data->map_2d_new[y][x] == '0')
