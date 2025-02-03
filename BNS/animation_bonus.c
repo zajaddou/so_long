@@ -6,21 +6,19 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:30:38 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/02/02 02:57:20 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/03 02:16:28 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 
-int	animation(void *param)
+int	animation(t_data	*data, int x, int y)
 {
-	t_data		*data;
 	static int	frame;
-	int			y;
-	int			x;
+	static int	on_off;
 
-	y = 0;
-	data = (t_data *)param;
+	if (frame++ < 2500)
+		return (1);
 	while (data->map_2d[y])
 	{
 		x = 0;
@@ -28,7 +26,7 @@ int	animation(void *param)
 		{
 			if (data->map_2d[y][x] == 'C')
 			{
-				if (frame)
+				if (on_off)
 					set_xmp(data, "./textures/coin.xpm", x, y);
 				else
 					set_xmp(data, "./textures/floor.xpm", x, y);
@@ -37,6 +35,18 @@ int	animation(void *param)
 		}
 		y++;
 	}
-	frame = !frame;
+	frame = 0;
+	on_off = !on_off;
+	return (0);
+}
+
+int	loop(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	if (data->c == 1)
+		animation(data, 0, 0);
+	monsters(data, 0, 0);
 	return (0);
 }

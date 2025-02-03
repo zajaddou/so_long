@@ -6,7 +6,7 @@
 /*   By: zajaddou <zajaddou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:07:08 by zajaddou          #+#    #+#             */
-/*   Updated: 2025/02/02 07:09:23 by zajaddou         ###   ########.fr       */
+/*   Updated: 2025/02/03 02:18:32 by zajaddou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ static void	move_monster(t_data *data, int y, int x)
 		kill_player(data);
 }
 
-int	monsters(t_data *data)
+int	monsters(t_data *data, int x, int y)
 {
-	int	y;
-	int	x;
+	static int	frame;
 
-	if (data->c == 1)
-		animation(data);
-	y = 0;
+	if (frame++ < 1000)
+		return (0);
 	while (data->map_2d_new[y])
 	{
 		x = 0;
@@ -64,7 +62,6 @@ int	monsters(t_data *data)
 		y++;
 	}
 	fast_render(data, 0, 0);
-	usleep(35000);
-	usleep(35000);
+	frame = 0;
 	return (0);
 }
